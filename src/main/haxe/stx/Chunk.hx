@@ -6,12 +6,12 @@ import haxe.ds.Option;
 
 using stx.Error;
 using stx.Tuple;
-import tink.CoreApi;
+import tink.core.Outcome;
 
 enum TChunk<V>{
   Val(v:V);
   Nil;
-  End(?err:Error);
+  End(?err:stx.Error);
 }
 
 abstract Chunk<T>(TChunk<T>) from TChunk<T> to TChunk<T>{

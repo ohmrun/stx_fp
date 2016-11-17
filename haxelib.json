@@ -9,12 +9,13 @@
     "contributors": [
         "0b1kn00b"
     ],
-    "releasenote": "Now uses stx.Error for error collation",
-    "version": "0.1.0",
+    "releasenote": "Update for stx_error fix",
+    "version": "0.1.1",
     "url": "https://github.com/0b1kn00b/stx_chunk",
     "dependencies": {
         "tink_core": "",
         "stx_tuple": "",
+        "stx_error": "",
         "pointwise": ""
     },
     "classPath": "src/main/haxe"
