@@ -9,9 +9,9 @@
     "contributors": [
         "0b1kn00b"
     ],
-    "releasenote": "Now uses stx.Error for error collation",
-    "version": "0.1.0",
-    "url": "https://github.com/0b1kn00b/stx_chunk",
+    "releasenote": "Another tiny lib.",
+    "version": "0.0.1",
+    "url": "https://github.com/0b1kn00b/stx_pointwise",
     "dependencies": {
         "tink_core": "",
         "stx_tuple": "",

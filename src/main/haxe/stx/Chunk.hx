@@ -15,7 +15,7 @@ enum TChunk<V>{
 }
 
 abstract Chunk<T>(TChunk<T>) from TChunk<T> to TChunk<T>{
-  @:from static public function fromError<E,T>(e:Error):Chunk<T>{
+  @:from static public function fromError<T>(e:Error):Chunk<T>{
     return End(e);
   }
   @:from static public function fromNull_T<T>(v:Null<T>):Chunk<T>{
