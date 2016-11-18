@@ -8,13 +8,36 @@ using stx.Error;
 using stx.Tuple;
 import tink.core.Outcome;
 
+#if tink_state
+  import tink.state.Promised;
+#end
+
 enum TChunk<V>{
   Val(v:V);
   Nil;
-  End(?err:stx.Error);
+  End(?err:Error);
 }
 
 abstract Chunk<T>(TChunk<T>) from TChunk<T> to TChunk<T>{
+
+#if tink_state
+  @:from static public function fromPromised<T>(p:Promised<T>):Chunk<T>{
+    return switch(p){
+      case Loading                  : Nil;
+      case Done(result)             : Val(result);
+      case Failed(err)              : Error.withData(err.code,err.message,err.data,err.pos);
+    }
+  }
+  /*
+  ??
+  @:to public function toPromised():Promised<T>{
+    return switch(this){
+      case Nil        : Loading;
+      case Val(v)     : Done(v);
+      case End(null)  : Failed
+    }
+  }*/
+#end
   @:from static public function fromError<T>(e:Error):Chunk<T>{
     return End(e);
   }
@@ -217,6 +240,15 @@ class Chunks{
       switch(chk){
         case Val(v) : fn(v);
         default     : 
+      }
+    }
+  }
+  @:noUsing static public function fmap<A,B>(fn:A->B):Chunk<A> -> Chunk<B>{
+    return function(chk){
+      return switch(chk){
+        case Val(v) : Val(fn(v));
+        case End(e) : End(e);
+        case Nil    : Nil;
       }
     }
   }
