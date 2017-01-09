@@ -4,13 +4,12 @@ using Lambda;
 
 import haxe.ds.Option;
 
+<<<<<<< HEAD
 using stx.Error;
+=======
+>>>>>>> 40c2349d4c0d654888ad0e8e244a56c1e8b8c0a7
 using stx.Tuple;
-import tink.core.Outcome;
-
-#if tink_state
-  import tink.state.Promised;
-#end
+import tink.CoreApi;
 
 enum TChunk<V>{
   Val(v:V);
@@ -19,16 +18,11 @@ enum TChunk<V>{
 }
 
 abstract Chunk<T>(TChunk<T>) from TChunk<T> to TChunk<T>{
-
-#if tink_state
-  @:from static public function fromPromised<T>(p:Promised<T>):Chunk<T>{
-    return Chunks.fromPromised(p);
-  }
-  @:to public function toPromised():Promised<T>{
-    return Chunks.toPromised(this);
-  }
-#end
+<<<<<<< HEAD
+  @:from static public function fromError<E,T>(e:Error):Chunk<T>{
+=======
   @:from static public function fromError<T>(e:Error):Chunk<T>{
+>>>>>>> 40c2349d4c0d654888ad0e8e244a56c1e8b8c0a7
     return End(e);
   }
   @:from static public function fromNull_T<T>(v:Null<T>):Chunk<T>{
@@ -70,32 +64,8 @@ abstract Chunk<T>(TChunk<T>) from TChunk<T> to TChunk<T>{
   public function isDefined():Bool{
     return Chunks.isDefined(this);
   }
-  @:from static public function fromOption<T>(opt:Option<T>):Chunk<T>{
-    return switch(opt){
-      case Some(v)  : Val(v);
-      case None     : Nil; 
-    }
-  }
 }
 class Chunks{
-
-#if tink_state
-  static public function fromPromised<T>(p:Promised<T>):Chunk<T>{
-    return switch(p){
-      case Loading                  : Nil;
-      case Done(result)             : Val(result);
-      case Failed(err)              : Error.withData(err.code,err.message,err.data,err.pos);
-    }
-  }
-  static public function toPromised<T>(chk:Chunk<T>):Promised<T>{
-    return switch(chk){
-      case Nil        : Loading;
-      case Val(v)     : Done(v);
-      case End(err)   : Failed(err);
-    }
-  }
-#end
-
   @:noUsing static public function create<A>(?c:A):TChunk<A>{
     return (c == null) ? Nil : Val(c);
   }
@@ -243,6 +213,7 @@ class Chunks{
       function() return false
     );
   }
+<<<<<<< HEAD
   static public function toChunk<T>(outcome:Outcome<T,Error>):Chunk<T>{
     return switch(outcome){
       case Success(v) : Chunks.create(v);
@@ -257,13 +228,6 @@ class Chunks{
       }
     }
   }
-  @:noUsing static public function fmap<A,B>(fn:A->B):Chunk<A> -> Chunk<B>{
-    return function(chk){
-      return switch(chk){
-        case Val(v) : Val(fn(v));
-        case End(e) : End(e);
-        case Nil    : Nil;
-      }
-    }
-  }
+=======
+>>>>>>> 40c2349d4c0d654888ad0e8e244a56c1e8b8c0a7
 }
