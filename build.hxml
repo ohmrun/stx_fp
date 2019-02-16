@@ -1,11 +1,10 @@
 -main Test
--x test
+
 -lib pointwise
 -lib tink_core
--lib stx_tuple
 -lib stx_error
-
--lib tink_state
 
 -cp src/main/haxe
 -cp src/test/haxe
+
+--interp
