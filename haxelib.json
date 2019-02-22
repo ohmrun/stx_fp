@@ -5,7 +5,7 @@
         "cross",
         "functional"
     ],
-    "description": "like: Either<Option<T>,Error>>, the type of data in finite streams, amongst other things",
+    "description": "",
     "contributors": [
         "0b1kn00b"
     ],
@@ -14,11 +14,8 @@
     "url": "https://github.com/0b1kn00b/stx_fp",
     "dependencies": {
         "tink_core": "",
-        "stx_error": "",
-        "stx_tuple": "",
-        "stx_error": "",
-        "pointwise": "",
-        "stx_transducers": ""
+        "stx_core": "",
+        "pointwise": ""
     },
     "classPath": "src/main/haxe"
 }

@@ -1,3 +1,3 @@
-package stx.data;
+package stx.fp.head.data;
 
-typedef Continuation<R,A>  = (A -> R) -> R;
+typedef Continuation<R,A>  = Unary<A -> R,R>;

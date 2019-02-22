@@ -1,8 +1,9 @@
 -main Test
 
--lib pointwise
 -lib tink_core
--lib stx_error
+
+-lib stx_core
+-lib pointwise
 
 -cp src/main/haxe
 -cp src/test/haxe

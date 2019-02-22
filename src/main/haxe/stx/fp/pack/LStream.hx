@@ -1,6 +1,6 @@
-package stx.ds.pack;
+package stx.fp.pack;
 
-import stx.ds.head.data.LStream in LStreamT;
+import stx.fp.head.data.LStream in LStreamT;
 
 /**
  * Seeing the commons between:

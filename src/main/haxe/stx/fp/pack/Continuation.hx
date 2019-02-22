@@ -1,9 +1,6 @@
-package stx;
+package stx.fp.pack;
 
-using stx.transducer.Lift;
-import stx.transducer.Package;
-import stx.data.*;
-import stx.data.Continuation in TContinuation;
+import stx.fp.head.data.Continuation in TContinuation;
 
 
 @:callable @:forward abstract Continuation<R,A>(TContinuation<R,A>) from TContinuation<R,A> to TContinuation<R,A>{
@@ -29,20 +26,19 @@ import stx.data.Continuation in TContinuation;
   public function each(k:A->Void):Continuation<R,A>{
     return Continuations.each(this,k);
   }
-  public function flatMap<B>(k:A -> Continuation<R,B>):Continuation<R,B>{
-    return Continuations.flatMap(this,k);
+  public function fmap<B>(k:A -> Continuation<R,B>):Continuation<R,B>{
+    return Continuations.fmap(this,k);
   }
   public function zipWith<B,C>(cnt0:Continuation<R,B>,fn:A->B->C):Continuation<R,C>{
     return Continuations.zipWith(this,cnt0,fn);
   }
-  static public function bindFold<R,A,B>(reducible:Reducible<A>,init:B,fold:B->A->Continuation<R,B>):Continuation<R,B>{
-    return reducible.reduce(
-      (c) -> c.reducer(
-        pure(init),
-        c.CONT(),
-        (next:A,memo:Continuation<R,B>) -> memo.flatMap(fold.bind(_,next))
-      )
-    ).unit;
+  static public function bindFold<R,A,B>(reducible:Array<A>,fold:A->B->Continuation<R,B>,init:B):Continuation<R,B>{
+    return reducible.fold(
+      (next,memo:Continuation<R,B>) -> {
+        return memo.fmap(fold.bind(next));
+      },
+      Continuation.pure(init)
+    );
   }
   static public function callcc<R,A,B>(f:(A->Continuation<R,B>)->Continuation<R,A>):Continuation<R,A>{
     return new Continuation(
@@ -61,6 +57,11 @@ import stx.data.Continuation in TContinuation;
   }
   public function asFunction():TContinuation<R,A>{
     return this;
+  }
+  public function mod(g:R->R):Continuation<R,A>{
+    return (f:A->R) -> {
+      return g(this(f));
+    }
   }
 }
 class Continuations{
@@ -85,7 +86,7 @@ class Continuations{
       }
     );
   }
-  static public function flatMap<R,A,B>(cnt:Continuation<R,A>,k:A -> Continuation<R,B>):Continuation<R,B>{
+  static public function fmap<R,A,B>(cnt:Continuation<R,A>,k:A -> Continuation<R,B>):Continuation<R,B>{
     return new Continuation(
       function(cont : B -> R):R{
         return apply(cnt, function(a:A):R{ return k(a).apply(cont); });

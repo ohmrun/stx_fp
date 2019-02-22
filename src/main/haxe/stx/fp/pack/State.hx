@@ -1,7 +1,7 @@
-package stx.core.pack;
+package stx.fp.pack;
 
-import stx.core.body.States;
-import stx.core.head.data.State in StateT;
+import stx.fp.pack.body.States;
+import stx.fp.head.data.State in StateT;
 
 @:forward @:callable abstract State<S,R>(StateT<S,R>) from StateT<S,R> to StateT<S,R>{
   @:noUsing static public function unit<S>():State<S,Noise>{

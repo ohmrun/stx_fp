@@ -1,4 +1,4 @@
-package stx.core.body;
+package stx.fp.pack.body;
 
 class States{
   static public function apply<S,R>(state:State<S,R>,s:S):Tuple2<R,S>{
