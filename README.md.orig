@@ -1,4 +1,7 @@
 # stx_chunk
+<<<<<<< HEAD
+like: Either&lt;Option&lt;T>,Error>>, the type of data in finite streams, amongst other things
+=======
 like: `Either<Option<T>,Error>>` the type of data in finite streams, amongst other things.
 
 
@@ -31,3 +34,4 @@ Where both conditions exist, Chunk is very useful, capturing the cases where the
     [Val(1), Val(2), Val(3), Nil]
 
 In this usage of `Chunk`, `Nil` represents a notification that the stream is at an end.
+>>>>>>> development

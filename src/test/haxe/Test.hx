@@ -1,7 +1,8 @@
-import stx.Chunk;
+
+import tink.CoreApi;
+
+import stx.fp.Package;
 
 class Test{
-  static function main(){
-    
-  }
+  static public function main(){}
 }
