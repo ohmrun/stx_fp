@@ -1,9 +1,11 @@
--main Test
+-main Main
+
 
 -lib tink_core
 
--lib stx_core
--lib pointwise
+-lib stx_pico
+-lib stx_nano
+-lib stx_fn
 
 -cp src/main/haxe
 -cp src/test/haxe

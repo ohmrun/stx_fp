@@ -1,6 +1,5 @@
 package stx.fp.pack;
 
-
 //This is a truly weird type.
 //It's half of a Freer Monad
 typedef CContinuationT<R,A> = Continuation<Either<CContinuation<R,A>,R>,A>;

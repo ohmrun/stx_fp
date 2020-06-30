@@ -1,8 +1,10 @@
 package stx.fp.pack;
 
-import stx.fp.head.data.SemiGroup in SemiGroupT;
+typedef SemiGroupDef<T> = {
+  public function plus(l:T,r:T):T;
+}
 
-abstract SemiGroup<T>(SemiGroupT<T>) from SemiGroupT<T>{
+@:forward abstract SemiGroup<T>(SemiGroupDef<T>) from SemiGroupDef<T>{
   public function new(self){
     this = self;
   }

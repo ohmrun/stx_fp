@@ -1,44 +1,44 @@
 package stx.fp.pack;
 
-import stx.fp.pack.body.States;
-import stx.fp.head.data.State in StateT;
+typedef StateDef<P,R> = P -> Couple<R,P>; 
 
-@:forward @:callable abstract State<S,R>(StateT<S,R>) from StateT<S,R> to StateT<S,R>{
-  @:noUsing static public function unit<S>():State<S,Noise>{
-    return function(s:S){
-      return tuple2(Noise,s);
+@:using(stx.fp.pack.State.StateLift)
+@:forward @:callable abstract State<P,R>(StateDef<P,R>) from StateDef<P,R> to StateDef<P,R>{
+  public function new(self) this = self;
+
+  @:noUsing static public function unit<P>():State<P,Noise>{
+    return function(p:P){
+      return __.couple(Noise,p);
     }
   }
-  @:noUsing static public function pure<S,A>(value:A):State<S,A>{
-    return function(s:S):Tuple2<A,S>{
-      return tuple2(value,s);
+  @:noUsing static public function pure<P,R>(r:R):State<P,R>{
+    return function(p:P):Couple<R,P>{
+      return __.couple(r,p);
     }
   }
-  public function new(v){
-    this = v;
+}
+class StateLift{
+  @doc("Run `State` with `s`, dropping the result and returning `s`.")
+  static public function exec<P,R>(self:State<P,R>,p:P):P{
+    return self(p).snd();
   }
-  public function apply(s:S):Tuple2<R,S>{
-    return this(s);
+  @doc("Run `State` with `s`, returning the result.")
+  static public function eval<P,R>(self:State<P,R>,p:P):R{
+    return self(p).fst();
   }
-  public function map<R1>(fn:R->R1):State<S,R1>{
-    return States.map(this,fn);
+  static public function map<P,R,Ri>(self:State<P,R>,fn:R->Ri):State<P,Ri>{
+    return (p:P) -> self(p).decouple(
+      (r,p) -> __.couple(fn(r),p)
+    );
   }
-  public function mod<S,R>(fn:S->S):State<S,R>{
-    return States.mod(this,fn);
+  static public function mod<P,R>(self:State<P,R>,fn:P->P):State<P,R>{
+    return (p) -> self(p).decouple(
+      (r,p) -> __.couple(r,fn(p))
+    );
   }
-  public function fmap<R1>(fn:R->State<S,R1>){
-    return States.fmap(this,fn);
-  }
-  public function then<R1>(fn:R->S->State<S,R1>){
-    return (s:S)-> {
-      var out = this(s);
-      return out.into(fn);
-    }
-  }
-  public function exec(s:S):S{
-    return apply(s).snd();
-  }
-  public function eval(s:S):R{
-    return apply(s).fst();
+  static public function flat_map<P,R,Ri>(self:State<P,R>,fn:R->State<P,Ri>):State<P,Ri>{
+    return (p) -> self(p).decouple(
+      (r,p) -> fn(r)(p)
+    );
   }
 }
