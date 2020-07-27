@@ -13,20 +13,24 @@ typedef LazyStreamDef<O> = State<LazyStream<O>,Option<O>>;
  */
 @:callable @:forward abstract LazyStream<O>(LazyStreamDef<O>) from LazyStreamDef<O>{
   static public var ZERO : LazyStream<Dynamic> = unit();
+  private function new(self) this = self;
+  @:noUsing static public function lift<O>(self:LazyStreamDef<O>):LazyStream<O>{
+    return new LazyStreamDef(self);
+  }
   static public function zero<O>():LazyStream<O>{
     return cast ZERO;
   }
   @:noUsing @:from static public function fromThunk<O>(v:Void->LazyStream<O>):LazyStream<O>{
-    return (inj:LazyStream<O>) -> v()(inj);
+    return lift((inj:LazyStream<O>) -> v()(inj));
   }
   @:noUsing @:from static public function fromRec<O>(v:Thunk<O>):LazyStream<O>{
-    return (inj:LazyStream<O>) -> __.couple(Some(v()),fromRec(v));
+    return lift((inj:LazyStream<O>) -> __.couple(Some(v()),fromRec(v)));
   }
   @:noUsing @:from static public function fromTuple<O>(tp:Couple<Option<O>,LazyStream<O>>):LazyStream<O>{
-    return (inj) -> tp;
+    return lift((inj) -> tp);
   }
   @:noUsing static public function unit<O>():LazyStream<O>{
-    return (inj) -> __.couple(None,unit());
+    return lift((inj) -> __.couple(None,unit()));
   }
   @:noUsing static public function make<O>(xs:LazyStream<O>,x:Option<O>):LazyStream<O>{
     return fromTuple(__.couple(x,xs));
