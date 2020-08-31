@@ -1,4 +1,4 @@
-package stx.fp.pack;
+package stx.fp;
 
 typedef LazyStreamDef<O> = State<LazyStream<O>,Option<O>>;
 

@@ -1,4 +1,4 @@
-package stx.fp.pack;
+package stx.fp;
 
 typedef DContinuationT<R,A> = Continuation<Either<R,R>,A>;
 

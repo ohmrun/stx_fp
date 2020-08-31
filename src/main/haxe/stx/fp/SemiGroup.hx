@@ -1,4 +1,4 @@
-package stx.fp.pack;
+package stx.fp;
 
 typedef SemiGroupDef<T> = {
   public function plus(l:T,r:T):T;

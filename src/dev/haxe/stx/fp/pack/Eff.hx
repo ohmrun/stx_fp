@@ -1,4 +1,4 @@
-package stx.fp.pack;
+package stx.fp;
 
 typedef InvocationT<U,A> = {
   function invoke<R>(handler:Handler<U,A,R>):R;
@@ -23,16 +23,18 @@ typedef Handler<U,A,R> = {
 }
 
 @:forward abstract Eff<U,A>(Invocation<U,A>) from Invocation<U,A> to Invocation<U,A>{
+  public function new(self) this = self;
+  
   @:noUsing static public function fromHandler<U,A,X>(h:Handle<U,A,X>):Eff<U,A>{
     function invoke<R>(handler:Handler<U,A,R>):R{
       return handler.handle(h);
     };
-    return {
+    return lift({
       invoke : invoke
-    };
+    });
   }
-  public function new(self){
-    this = self;
+  static public function lift<U,A>(self:Invocation<U,A>):Eff<U,A>{
+    return new Eff(self);
   }
   public function elide():Invocation<U,Dynamic>{
     return this;

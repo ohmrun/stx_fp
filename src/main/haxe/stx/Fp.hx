@@ -10,23 +10,28 @@ class Fp{
 
   }
 }
-typedef LazyStreamDef<T>        = stx.fp.pack.LazyStream.LazyStreamDef<T>;
-typedef LazyStream<T>           = stx.fp.pack.LazyStream<T>;
+typedef LazyStreamDef<T>        = stx.fp.LazyStream.LazyStreamDef<T>;
+typedef LazyStream<T>           = stx.fp.LazyStream<T>;
 
-typedef StateDef<R,A>           = stx.fp.pack.State.StateDef<R,A>;
-typedef State<R,A>              = stx.fp.pack.State<R,A>;
+typedef StateDef<R,A>           = stx.fp.State.StateDef<R,A>;
+typedef State<R,A>              = stx.fp.State<R,A>;
 
-typedef SemiGroupDef<T>         = stx.fp.pack.SemiGroup.SemiGroupDef<T>;
-typedef SemiGroup<T>            = stx.fp.pack.SemiGroup<T>;
+typedef SemiGroupDef<T>         = stx.fp.SemiGroup.SemiGroupDef<T>;
+typedef SemiGroup<T>            = stx.fp.SemiGroup<T>;
 
-typedef MonoidDef<T>            = stx.fp.pack.Monoid.MonoidDef<T>;
-typedef Monoid<T>               = stx.fp.pack.Monoid<T>;
+typedef MonoidDef<T>            = stx.fp.Monoid.MonoidDef<T>;
+typedef Monoid<T>               = stx.fp.Monoid<T>;
 
-typedef ContinuationDef<R,A>    = stx.fp.pack.Continuation.ContinuationDef<R,A>;
-typedef Continuation<R,A>       = stx.fp.pack.Continuation<R,A>;
+typedef ContinuationDef<R,A>    = stx.fp.Continuation.ContinuationDef<R,A>;
+typedef Continuation<R,A>       = stx.fp.Continuation<R,A>;
 
-typedef HandlerDef<T>           = stx.fp.pack.Handler.HandlerDef<T>;
-typedef Handler<T>              = stx.fp.pack.Handler<T>;
+typedef HandlerDef<T>           = stx.fp.Handler.HandlerDef<T>;
+typedef Handler<T>              = stx.fp.Handler<T>;
+
+typedef Fix<A>                  = stx.fp.Fix<A>;
+typedef FreeFSum<F,E,A>         = stx.fp.FreeF.FreeFSum<F,E,A>;
+typedef FreeF<F,E,A>            = stx.fp.FreeF<F,E,A>;
+typedef Kind<F,A>               = stx.fp.Kind<F,A>;
 
 class LiftFp{
   static public function asState<P,A>(fn:P->Couple<A,P>):State<P,A>{

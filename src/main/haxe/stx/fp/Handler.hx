@@ -1,10 +1,10 @@
-package stx.fp.pack;
+package stx.fp;
 
-import stx.fp.pack.Continuation.ContinuationLift in CL;
+import stx.fp.Continuation.ContinuationLift in CL;
 
 typedef HandlerDef<T> = ContinuationDef<Void,T>;
 
-@:using(stx.fp.pack.Handler.HandlerLift)
+@:using(stx.fp.Handler.HandlerLift)
 @:callable abstract Handler<T>(HandlerDef<T>) from HandlerDef<T> to HandlerDef<T>{
   static public function lift(self) return new Handler(self);
   public function new(self) this = self;

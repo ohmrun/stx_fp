@@ -1,4 +1,4 @@
-package stx.fp.pack;
+package stx.fp;
 
 typedef MonoidDef<T> = {
   >SemiGroupDef<T>,

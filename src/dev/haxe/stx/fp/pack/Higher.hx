@@ -1,3 +1,3 @@
-package stx.fp.pack;
+package stx.fp;
 
 abstract Higher<In,Of,T>(T){}

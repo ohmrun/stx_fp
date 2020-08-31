@@ -1,8 +1,8 @@
-package stx.fp.pack;
+package stx.fp;
 
 typedef StateDef<P,R> = P -> Couple<R,P>; 
 
-@:using(stx.fp.pack.State.StateLift)
+@:using(stx.fp.State.StateLift)
 @:forward @:callable abstract State<P,R>(StateDef<P,R>) from StateDef<P,R> to StateDef<P,R>{
   public function new(self) this = self;
 

@@ -1,7 +1,7 @@
 
 import tink.CoreApi;
 
-import stx.fp.Package;
+import stx.fpage;
 
 class Test{
   static public function main(){}
