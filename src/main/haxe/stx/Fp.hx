@@ -31,6 +31,8 @@ typedef Handler<T>              = stx.fp.Handler<T>;
 typedef Fix<A>                  = stx.fp.Fix<A>;
 typedef FreeFSum<F,E,A>         = stx.fp.FreeF.FreeFSum<F,E,A>;
 typedef FreeF<F,E,A>            = stx.fp.FreeF<F,E,A>;
+typedef KindApi<F,A>            = stx.fp.Kind.KindApi<F,A>;
+typedef KindDef<F,A>            = stx.fp.Kind.KindDef<F,A>;
 typedef Kind<F,A>               = stx.fp.Kind<F,A>;
 
 class LiftFp{

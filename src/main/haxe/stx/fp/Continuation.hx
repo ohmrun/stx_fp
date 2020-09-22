@@ -47,6 +47,8 @@ class ContinuationLift{
     );
   }
   static public function mod<R,P>(self:ContinuationDef<R,P>,g:R->R):Continuation<R,P>{
-    return (f:P->R) -> g(self(f));
+    return (f:P->R) -> {
+      return g(self(f));
+    };
   }
 }

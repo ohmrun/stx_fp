@@ -1,3 +1,5 @@
 package stx.fp;
 
-typedef With<C,D> = {};
+typedef With<C,D> = {
+
+};
