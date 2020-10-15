@@ -9,8 +9,8 @@
     "contributors": [
         "0b1kn00b"
     ],
-    "releasenote": "Removed LazyStream for haxe compiler bug #9695",
-    "version": "0.2.0",
+    "releasenote": "Reinstated refactored LazyStream cos I neeeed it.",
+    "version": "0.3.0",
     "url": "https://github.com/0b1kn00b/stx_fp",
     "dependencies" : {
         "tink_core": "",

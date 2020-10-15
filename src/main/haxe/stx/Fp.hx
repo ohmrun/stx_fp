@@ -9,8 +9,9 @@ class Fp{
 
   }
 }
-//typedef LazyStreamDef<T>        = stx.fp.LazyStream.LazyStreamDef<T>;
-//typedef LazyStream<T>           = stx.fp.LazyStream<T>;
+typedef LazyStreamSum<T>        = stx.fp.LazyStream.LazyStreamSum<T>;
+typedef LazyStreamTrigger<T>    = stx.fp.LazyStream.LazyStreamTrigger<T>;
+typedef LazyStream<T>           = stx.fp.LazyStream<T>;
 
 typedef StateDef<R,A>           = stx.fp.State.StateDef<R,A>;
 typedef State<R,A>              = stx.fp.State<R,A>;
