@@ -13,11 +13,10 @@
     "version": "0.3.0",
     "url": "https://github.com/0b1kn00b/stx_fp",
     "dependencies" : {
-        "tink_core": "",
-        
-        "stx_pico": "",
-        "stx_nano": "",
-        "stx_fn": "1.0.0"
+        "tink_core" : "",
+        "stx_pico"  : "",
+        "stx_nano"  : "",
+        "stx_fn"    : "git:https://github.com/ohmrun/stx_fn.git"
     },
     "classPath": "src/main/haxe"
 }
