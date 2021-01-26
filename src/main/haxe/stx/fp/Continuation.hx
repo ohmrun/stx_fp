@@ -2,7 +2,6 @@ package stx.fp;
 
 typedef ContinuationDef<R,P>  = (P -> R) -> R;
 
-
 @:using(stx.fp.Continuation.ContinuationLift)
 @:callable @:forward abstract Continuation<R,P>(ContinuationDef<R,P>) from ContinuationDef<R,P> to ContinuationDef<R,P>{
   static public var _(default,never) = ContinuationLift;
