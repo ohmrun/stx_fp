@@ -19,10 +19,12 @@ typedef ContinuationDef<R,P>  = (P -> R) -> R;
       )
     )(k);
   }
-  public function asFunction():ContinuationDef<R,P>{
+  public inline function asFunction():ContinuationDef<R,P>{
     return this;
   }
-  
+  public inline function prj(){
+    return asFunction();
+  } 
 }
 class ContinuationLift{
   static public function apply<R,P>(self:ContinuationDef<R,P>,fn:P->R):R{
