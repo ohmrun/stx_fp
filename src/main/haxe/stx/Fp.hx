@@ -40,3 +40,48 @@ class LiftFp{
     return new State(fn);
   }
 }
+
+//https://github.com/frabbit/scuts/blob/master/scutsHt
+//Cribbed frrom Scuts
+
+/**
+ * In is a Marker type that allows the representation
+ * of a parametric type as a type constructor.
+ * 
+ * f.e. the type constructor Array must be represented as Array<In>
+ */
+ #if (js || neko)
+ abstract In(Dynamic) {
+   function new (x) this = x;
+   @:from static public function fromWildcard(self:Wildcard):In{
+     return new In(self);
+   } 
+ }
+ #else
+ class In {}
+ #end
+ 
+/*
+* Represents a type constructor that needs one type to construct a real type.
+* 
+* f.e. Array<T> can be represented as Of<Array<In>, T>
+* 
+*/
+abstract OfI<M,A>(Dynamic) {
+	public function new(x:Dynamic) this = x;
+}
+
+abstract Of<M,A>(OfI<M,A>){
+	public inline function new(o:Dynamic) this = o;
+}
+
+/**
+ * Represents a type constructor that needs two types to construct a real type.
+ * 
+ * f.e. Int->String can be represented as OfOf<In->In, Int, String>
+ * 
+ */
+typedef OfOf<M,A,B>              = Of<Of<M, A>, B>;
+typedef ProfunctorDef<F,A,B,C,D> = (A -> C) -> (B -> D) -> OfOf<F,C,B> -> OfOf<F,A,D>;
+
+//where dimap :: (a -> c) -> (b -> d) -> f c b -> f a d
