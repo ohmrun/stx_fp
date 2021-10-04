@@ -1,4 +1,4 @@
-import stx.Fp;
+using stx.Fp;
 
 class Main{
   static function main(){

@@ -17,7 +17,8 @@
 
         "stx_pico"      : "git:https://github.com/ohmrun/stx_pico.git",
         "stx_nano"      : "git:https://github.com/ohmrun/stx_nano.git",
-        "stx_fn"        : "git:https://github.com/ohmrun/stx_fn.git"
+        "stx_fn"        : "git:https://github.com/ohmrun/stx_fn.git",
+        "stx_assert"    : "git:https://github.com/ohmrun/stx_assert.git"
     },
     "classPath": "src/main/haxe"
 }

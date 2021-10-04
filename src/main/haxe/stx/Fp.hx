@@ -85,3 +85,57 @@ typedef OfOf<M,A,B>              = Of<Of<M, A>, B>;
 typedef ProfunctorDef<F,A,B,C,D> = (A -> C) -> (B -> D) -> OfOf<F,C,B> -> OfOf<F,A,D>;
 
 //where dimap :: (a -> c) -> (b -> d) -> f c b -> f a d
+
+//https://gist.github.com/non/918ce8cc7f4166bbdef3
+
+typedef MeetSemiLatticeDef<T> = {
+  function meet(l:T,r:T):T;
+
+  final with : PartialComparableApi<T>;
+}
+interface MeetSemiLatticeApi<T>{
+  function meet(l:T,r:T):T;
+
+  final with : PartialComparableApi<T>;
+}
+typedef JoinSemiLatticeDef<T> = {
+  function join(l:T,r:T):T;
+
+  final with : PartialComparableApi<T>;
+}
+interface JoinSemiLatticeApi<T>{
+  function join(l:T,r:T):T;
+
+  final with : PartialComparableApi<T>;
+}
+interface LatticeApi<T> extends JoinSemiLatticeApi<T> extends MeetSemiLatticeApi<T>{}
+typedef LatticeDef<T> = JoinSemiLatticeDef<T> & MeetSemiLatticeDef<T>;
+
+typedef BoundedLatticeDef<T> = LatticeDef<T> & {
+  function zero():T;
+  function one():T;
+} 
+interface BoundedLatticeApi<T> extends LatticeApi<T>{
+  function zero():T;
+  function one():T;
+} 
+abstract BoundedLattice<T>(BoundedLatticeDef<T>) from BoundedLatticeDef<T> to BoundedLatticeDef<T>{
+  public function new(self) this = self;
+  static public function lift<T>(self:BoundedLatticeDef<T>):BoundedLattice<T> return new BoundedLattice(self);
+  
+  public function meeter():Monoid<T>{
+    return {
+      plus : this.meet,
+      unit : this.zero
+    }
+  }
+  public function joiner():Monoid<T>{
+    return {
+      plus : this.join,
+      unit : this.one
+    }
+  }
+  public function prj():BoundedLatticeDef<T> return this;
+  private var self(get,never):BoundedLattice<T>;
+  private function get_self():BoundedLattice<T> return lift(this);
+}
