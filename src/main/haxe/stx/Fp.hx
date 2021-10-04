@@ -53,9 +53,9 @@ class LiftFp{
  #if (js || neko)
  abstract In(Dynamic) {
    function new (x) this = x;
-   @:from static public function fromWildcard(self:Wildcard):In{
-     return new In(self);
-   } 
+  //  @:from static public function fromWildcard(self:Wildcard):In{
+  //    return new In(null);
+  //  } 
  }
  #else
  class In {}
