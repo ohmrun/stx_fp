@@ -1,0 +1,12 @@
+{
+  "build" : {
+    "-lib" : ["tink_core","stx_pico", "stx_nano", "stx_fn", "stx_assert"], 
+    "interp" : {
+      "-main"     : "Main",
+      "--interp"  : true,
+      "test" : {
+        "-main" : "stx.fp.Test"
+      }
+    }
+  }
+}

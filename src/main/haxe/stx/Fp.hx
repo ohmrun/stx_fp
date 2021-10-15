@@ -8,6 +8,9 @@ class Fp{
   @:allow(stx)static private dynamic function handle<T>(opt:T):Void{
 
   }
+  static public function with<A,B,C>(wildcard:Wildcard,a:A,b:B):With<A,B,C>{
+    return (c:C) -> __.triple(a,b,c);
+  }
 }
 typedef LazyStreamSum<T>        = stx.fp.LazyStream.LazyStreamSum<T>;
 typedef LazyStreamTrigger<T>    = stx.fp.LazyStream.LazyStreamTrigger<T>;

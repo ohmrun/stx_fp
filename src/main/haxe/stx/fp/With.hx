@@ -4,9 +4,9 @@ import haxe.macro.Context;
 import haxe.macro.Expr;
 import haxe.macro.Type;
 
-typedef WithDef<C,D,E> = Triple<C,D,E>;
+typedef WithDef<C,D,E> = E -> Triple<C,D,E>;
 
-@:forward(_0,_1,_2) abstract With<C,D,E>(WithDef<C,D,E>) from WithDef<C,D,E> to WithDef<C,D,E>{
+@:callable @:forward(_0,_1,_2) abstract With<C,D,E>(WithDef<C,D,E>) from WithDef<C,D,E> to WithDef<C,D,E>{
   public function new(self) this = self;
   static public function lift<C,D,E>(self:WithDef<C,D,E>):With<C,D,E> return new With(self);
 
@@ -28,7 +28,7 @@ typedef WithDef<C,D,E> = Triple<C,D,E>;
         function dive(type:Type,ref:String):Option<Expr>{
           //trace(str);
           final sel    = '_$ref';
-          final tri    = macro @:privateAccess ${ethis}.$sel;
+          final tri    = macro ${ethis}(null).$sel;
           final result = macro $tri.$str;
           //trace(p.printExpr(result));
           return switch(type){

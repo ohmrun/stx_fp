@@ -16,8 +16,9 @@ class WithTest extends TestCase{
       b : true,
       f : 900
     }
-    var c : With<TypeA,TypeB,Noise> = __.triple(a,b,Noise);
+    var c = __.with(a,b);
     var d = c.f;
     trace(d);
+    $type(c);
   }
 }
