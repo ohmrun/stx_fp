@@ -35,6 +35,8 @@ typedef KindApi<F,A>            = stx.fp.Kind.KindApi<F,A>;
 typedef KindDef<F,A>            = stx.fp.Kind.KindDef<F,A>;
 typedef Kind<F,A>               = stx.fp.Kind<F,A>;
 
+typedef With<C,D,E>             = stx.fp.With<C,D,E>;
+
 class LiftFp{
   static public function asState<P,A>(fn:P->Couple<A,P>):State<P,A>{
     return new State(fn);
@@ -91,22 +93,22 @@ typedef ProfunctorDef<F,A,B,C,D> = (A -> C) -> (B -> D) -> OfOf<F,C,B> -> OfOf<F
 typedef MeetSemiLatticeDef<T> = {
   function meet(l:T,r:T):T;
 
-  final with : PartialComparableApi<T>;
+  public final with : PartialComparableApi<T>;
 }
 interface MeetSemiLatticeApi<T>{
   function meet(l:T,r:T):T;
 
-  final with : PartialComparableApi<T>;
+  public final with : PartialComparableApi<T>;
 }
 typedef JoinSemiLatticeDef<T> = {
   function join(l:T,r:T):T;
 
-  final with : PartialComparableApi<T>;
+  public final with : PartialComparableApi<T>;
 }
 interface JoinSemiLatticeApi<T>{
   function join(l:T,r:T):T;
 
-  final with : PartialComparableApi<T>;
+  public final with : PartialComparableApi<T>;
 }
 interface LatticeApi<T> extends JoinSemiLatticeApi<T> extends MeetSemiLatticeApi<T>{}
 typedef LatticeDef<T> = JoinSemiLatticeDef<T> & MeetSemiLatticeDef<T>;
