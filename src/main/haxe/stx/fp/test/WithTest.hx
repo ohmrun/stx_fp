@@ -19,6 +19,6 @@ class WithTest extends TestCase{
     var c = __.with(a,b);
     var d = c.f;
     trace(d);
-    $type(c);
+    //$type(c);
   }
 }

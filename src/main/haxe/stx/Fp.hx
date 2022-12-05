@@ -16,13 +16,15 @@ typedef LazyStreamSum<T>        = stx.fp.LazyStream.LazyStreamSum<T>;
 typedef LazyStreamTrigger<T>    = stx.fp.LazyStream.LazyStreamTrigger<T>;
 typedef LazyStream<T>           = stx.fp.LazyStream<T>;
 
-typedef StateDef<R,A>           = stx.fp.State.StateDef<R,A>;
-typedef State<R,A>              = stx.fp.State<R,A>;
+typedef StateMDef<R,A>           = stx.fp.StateM.StateMDef<R,A>;
+typedef StateM<R,A>              = stx.fp.StateM<R,A>;
 
+typedef SemiGroupCls<T>         = stx.fp.SemiGroup.SemiGroupCls<T>;
+typedef SemiGroupApi<T>         = stx.fp.SemiGroup.SemiGroupApi<T>;
 typedef SemiGroupDef<T>         = stx.fp.SemiGroup.SemiGroupDef<T>;
 typedef SemiGroup<T>            = stx.fp.SemiGroup<T>;
 
-typedef MonoidDef<T>            = stx.fp.Monoid.MonoidDef<T>;
+typedef MonoidApi<T>            = stx.fp.Monoid.MonoidApi<T>;
 typedef Monoid<T>               = stx.fp.Monoid<T>;
 
 typedef ContinuationDef<R,A>    = stx.fp.Continuation.ContinuationDef<R,A>;
@@ -31,19 +33,19 @@ typedef Continuation<R,A>       = stx.fp.Continuation<R,A>;
 typedef HandlerDef<T>           = stx.fp.Handler.HandlerDef<T>;
 typedef Handler<T>              = stx.fp.Handler<T>;
 
-typedef Fix<A>                  = stx.fp.Fix<A>;
-typedef FreeFSum<F,E,A>         = stx.fp.FreeF.FreeFSum<F,E,A>;
-typedef FreeF<F,E,A>            = stx.fp.FreeF<F,E,A>;
-typedef KindApi<F,A>            = stx.fp.Kind.KindApi<F,A>;
-typedef KindDef<F,A>            = stx.fp.Kind.KindDef<F,A>;
-typedef Kind<F,A>               = stx.fp.Kind<F,A>;
+//typedef Fix<A>                  = stx.fp.Fix<A>;
+//typedef FreeFSum<F,E,A>         = stx.fp.FreeF.FreeFSum<F,E,A>;
+//typedef FreeF<F,E,A>            = stx.fp.FreeF<F,E,A>;
+// typedef KindApi<F,A>            = stx.fp.nd.KindApi<F,A>;
+// typedef KindDef<F,A>            = stx.fp.Kind.KindDef<F,A>;
+// typedef Kind<F,A>               = stx.fp.Kind<F,A>;
 
 typedef With<C,D,E>             = stx.fp.With<C,D,E>;
 
 class LiftFp{
-  static public function asState<P,A>(fn:P->Couple<A,P>):State<P,A>{
-    return new State(fn);
-  }
+  // static public function asState<P,A>(fn:P->Couple<A,P>):State<P,A>{
+  //   return new State(fn);
+  // }
 }
 
 //https://github.com/frabbit/scuts/blob/master/scutsHt
@@ -116,31 +118,31 @@ interface JoinSemiLatticeApi<T>{
 interface LatticeApi<T> extends JoinSemiLatticeApi<T> extends MeetSemiLatticeApi<T>{}
 typedef LatticeDef<T> = JoinSemiLatticeDef<T> & MeetSemiLatticeDef<T>;
 
-typedef BoundedLatticeDef<T> = LatticeDef<T> & {
-  function zero():T;
-  function one():T;
-} 
-interface BoundedLatticeApi<T> extends LatticeApi<T>{
-  function zero():T;
-  function one():T;
-} 
-abstract BoundedLattice<T>(BoundedLatticeDef<T>) from BoundedLatticeDef<T> to BoundedLatticeDef<T>{
-  public function new(self) this = self;
-  static public function lift<T>(self:BoundedLatticeDef<T>):BoundedLattice<T> return new BoundedLattice(self);
+// typedef BoundedLatticeDef<T> = LatticeDef<T> & {
+//   function zero():T;
+//   function one():T;
+// } 
+// interface BoundedLatticeApi<T> extends LatticeApi<T>{
+//   function zero():T;
+//   function one():T;
+// } 
+// abstract BoundedLattice<T>(BoundedLatticeDef<T>) from BoundedLatticeDef<T> to BoundedLatticeDef<T>{
+//   public function new(self) this = self;
+//   @:noUsing static public function lift<T>(self:BoundedLatticeDef<T>):BoundedLattice<T> return new BoundedLattice(self);
   
-  public function meeter():Monoid<T>{
-    return {
-      plus : this.meet,
-      unit : this.zero
-    }
-  }
-  public function joiner():Monoid<T>{
-    return {
-      plus : this.join,
-      unit : this.one
-    }
-  }
-  public function prj():BoundedLatticeDef<T> return this;
-  private var self(get,never):BoundedLattice<T>;
-  private function get_self():BoundedLattice<T> return lift(this);
-}
+//   public function meeter():Monoid<T>{
+//     return {
+//       plus : this.meet,
+//       unit : this.zero
+//     }
+//   }
+//   public function joiner():Monoid<T>{
+//     return {
+//       plus : this.join,
+//       unit : this.one
+//     }
+//   }
+//   public function prj():BoundedLatticeDef<T> return this;
+//   private var self(get,never):BoundedLattice<T>;
+//   private function get_self():BoundedLattice<T> return lift(this);
+// }

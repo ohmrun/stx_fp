@@ -6,7 +6,7 @@ typedef HandlerDef<T> = ContinuationDef<Void,T>;
 
 @:using(stx.fp.Handler.HandlerLift)
 @:callable abstract Handler<T>(HandlerDef<T>) from HandlerDef<T> to HandlerDef<T>{
-  static public function lift(self) return new Handler(self);
+  @:noUsing static public function lift(self) return new Handler(self);
   public function new(self) this = self;
 
   public function handle(cb:T->Void){
@@ -17,7 +17,7 @@ typedef HandlerDef<T> = ContinuationDef<Void,T>;
   }
 }
 class HandlerLift{
-  static public function lift<P>(self:HandlerDef<P>):Handler<P>{
+  @:noUsing static public function lift<P>(self:HandlerDef<P>):Handler<P>{
     return new Handler(self);
   }
   static public function apply<P>(self:Handler<P>,fn:P->Void):Void{

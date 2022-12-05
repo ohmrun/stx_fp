@@ -8,7 +8,7 @@ typedef WithDef<C,D,E> = E -> Triple<C,D,E>;
 
 @:callable @:forward(_0,_1,_2) abstract With<C,D,E>(WithDef<C,D,E>) from WithDef<C,D,E> to WithDef<C,D,E>{
   public function new(self) this = self;
-  static public function lift<C,D,E>(self:WithDef<C,D,E>):With<C,D,E> return new With(self);
+  @:noUsing static public function lift<C,D,E>(self:WithDef<C,D,E>):With<C,D,E> return new With(self);
 
   public function prj():WithDef<C,D,E> return this;
   private var self(get,never):With<C,D,E>;
@@ -59,7 +59,7 @@ typedef WithDef<C,D,E> = E -> Triple<C,D,E>;
         }
         switch(type){
           case TType(_,[a,b,c]) :
-            final expr = dive(c,'2').or(dive.bind(b,'1')).or(dive.bind(a,'0')).fudge(__.fault().external('no field named $name'));
+            final expr = dive(c,'2').or(dive.bind(b,'1')).or(dive.bind(a,'0')).fudge(__.fault().explain(_ -> _.e_no_field('$name')));
             //trace(p.printExpr(expr));
             expr;
           default : 

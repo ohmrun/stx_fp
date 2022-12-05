@@ -4,7 +4,7 @@ typedef DContinuationT<R,A> = Continuation<Either<R,R>,A>;
 
 @:callable @:forward abstract DContinuation<R,A>(DContinuationT<R,A>) from DContinuationT<R,A> to DContinuationT<R,A>{
   public function new(self) this = self;
-  static public function pure<R,A>(v:A):DContinuation<R,A>{
+  @:noUsing static public function pure<R,A>(v:A):DContinuation<R,A>{
     return Continuation.pure(v);
   }
   public function and(that:DContinuation<R,A>):DContinuation<R,A>{

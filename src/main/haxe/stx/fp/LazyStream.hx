@@ -5,7 +5,7 @@ typedef LazyStreamTriggerDef<O> = {
 }
 @:forward abstract LazyStreamTrigger<O>(LazyStreamTriggerDef<O>) from LazyStreamTriggerDef<O> to LazyStreamTriggerDef<O>{
   public function new(self) this = self;
-  static public function lift<O>(self:LazyStreamTriggerDef<O>):LazyStreamTrigger<O> return new LazyStreamTrigger(self);
+  @:noUsing static public function lift<O>(self:LazyStreamTriggerDef<O>):LazyStreamTrigger<O> return new LazyStreamTrigger(self);
   @:from static public function fromFn<O>(fn:Void->LazyStream<O>):LazyStreamTrigger<O>{
     return {
       next : fn

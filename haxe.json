@@ -7,6 +7,12 @@
       "test" : {
         "-main" : "stx.fp.Test"
       }
+    },
+    "unit" : {
+      "--macro" : [
+        "include('stx.fp',true)"
+      ],
+      "--main" : "Unit"
     }
   }
 }

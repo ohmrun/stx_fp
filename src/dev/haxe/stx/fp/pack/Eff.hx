@@ -33,13 +33,13 @@ typedef Handler<U,A,R> = {
       invoke : invoke
     });
   }
-  static public function lift<U,A>(self:Invocation<U,A>):Eff<U,A>{
+  @:noUsing static public function lift<U,A>(self:Invocation<U,A>):Eff<U,A>{
     return new Eff(self);
   }
   public function elide():Invocation<U,Dynamic>{
     return this;
   }
-  static public function pure<U,A>(x:A){
+  @:noUsing static public function pure<U,A>(x:A){
     return EffBuilder.pure(x);
   }
   public function fmap<B>(fn:A->Eff<U,B>):Eff<U,B>{
@@ -74,7 +74,7 @@ abstract Impure<U,A,X>(Invocation<U,A>) to Invocation<U,A>{
 }
 
 class EffBuilder{
-  static public function pure<U,A>(x:A){
+  @:noUsing static public function pure<U,A>(x:A){
     return new Pure(x);
   }
   static public function fmap<U,A,B>(eff:Eff<U,A>,f:A->Eff<U,B>):Eff<U,B>{
