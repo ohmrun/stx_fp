@@ -1,18 +1,26 @@
 {
   "build" : {
+    "-cp" : "src/main/haxe",
     "-lib" : ["tink_core","stx_pico", "stx_nano", "stx_fn", "stx_assert"], 
-    "interp" : {
-      "-main"     : "Main",
-      "--interp"  : true,
-      "test" : {
-        "-main" : "stx.fp.Test"
-      }
-    },
     "unit" : {
       "--macro" : [
         "include('stx.fp',true)"
       ],
-      "--main" : "Unit"
+      "-main" : "Unit"
+    },
+    "main" : {
+      "interp" : {
+        "-main"     : "Main",
+        "--interp"  : true
+      }
+    },
+    "test" : {
+      "-L" : ["stx_test"],
+      "-cp" : "src/test/haxe",
+      "-main" : "stx.fp.Test",
+      "interp" : {
+        "--interp"  : true
+      }
     }
   }
 }
