@@ -1,5 +1,8 @@
 package stx;
 
+using stx.Nano;
+using stx.Assert;
+
 class Fp{
   /**
    * Type Ninja.
