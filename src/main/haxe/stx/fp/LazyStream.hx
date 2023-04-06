@@ -1,5 +1,7 @@
 package stx.fp;
 
+
+
 typedef LazyStreamTriggerDef<O> = {
   public function next():LazyStream<O>;
 }
@@ -44,7 +46,7 @@ enum LazyStreamSum<O>{
     return lift(LazyVal(tp.fst(),tp.snd()));
   }
   @:noUsing static public function make<O>(xs:LazyStreamTrigger<O>,x:Option<O>):LazyStream<O>{
-    return fromTuple(__.couple(x,xs));
+    return fromTuple(Couple.make(x,xs));
   }
   @:noUsing static public function unit<O>():LazyStream<O>{
     return LazyVal(null,LazyStreamTrigger.fromFn(unit));
@@ -54,7 +56,7 @@ enum LazyStreamSum<O>{
   }
   public function reply():Couple<Option<O>,LazyStreamTrigger<O>>{
     return switch(this){
-      case LazyVal(val, next): __.couple(val,next);
+      case LazyVal(val, next): Couple.make(val,next);
     }
   }
 }
