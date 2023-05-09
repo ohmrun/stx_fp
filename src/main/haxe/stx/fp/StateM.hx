@@ -6,9 +6,9 @@ typedef StateMDef<P,R> = P -> Couple<R,P>;
 @:forward @:callable abstract StateM<P,R>(StateMDef<P,R>) from StateMDef<P,R> to StateMDef<P,R>{
   public function new(self) this = self;
 
-  @:noUsing static public function unit<P>():StateM<P,Noise>{
+  @:noUsing static public function unit<P>():StateM<P,Nada>{
     return function(p:P){
-      return __.couple(Noise,p);
+      return __.couple(Nada,p);
     }
   }
   @:noUsing static public function pure<P,R>(r:R):StateM<P,R>{
