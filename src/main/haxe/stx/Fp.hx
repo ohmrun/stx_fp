@@ -14,18 +14,21 @@ class Fp{
   static public function with<A,B,C>(wildcard:Wildcard,a:A,b:B):With<A,B,C>{
     return (c:C) -> __.triple(a,b,c);
   }
+  static public function fp(wildcard:Wildcard){
+    return new stx.fp.Module();
+  } 
 }
-typedef LazyStreamSum<T>        = stx.fp.LazyStream.LazyStreamSum<T>;
-typedef LazyStreamTrigger<T>    = stx.fp.LazyStream.LazyStreamTrigger<T>;
-typedef LazyStream<T>           = stx.fp.LazyStream<T>;
+typedef LazyStreamSum<T>          = stx.fp.LazyStream.LazyStreamSum<T>;
+typedef LazyStreamTrigger<T>      = stx.fp.LazyStream.LazyStreamTrigger<T>;
+typedef LazyStream<T>             = stx.fp.LazyStream<T>;
 
-typedef StateMDef<R,A>           = stx.fp.StateM.StateMDef<R,A>;
-typedef StateM<R,A>              = stx.fp.StateM<R,A>;
+typedef StateMDef<R,A>            = stx.fp.StateM.StateMDef<R,A>;
+typedef StateM<R,A>               = stx.fp.StateM<R,A>;
 
-typedef SemiGroupCls<T>         = stx.fp.SemiGroup.SemiGroupCls<T>;
-typedef SemiGroupApi<T>         = stx.fp.SemiGroup.SemiGroupApi<T>;
-typedef SemiGroupDef<T>         = stx.fp.SemiGroup.SemiGroupDef<T>;
-typedef SemiGroup<T>            = stx.fp.SemiGroup<T>;
+typedef SemiGroupCls<T>           = stx.fp.SemiGroup.SemiGroupCls<T>;
+typedef SemiGroupApi<T>           = stx.fp.SemiGroup.SemiGroupApi<T>;
+typedef SemiGroupDef<T>           = stx.fp.SemiGroup.SemiGroupDef<T>;
+typedef SemiGroup<T>              = stx.fp.SemiGroup<T>;
 
 typedef MonoidApi<T>            = stx.fp.Monoid.MonoidApi<T>;
 typedef Monoid<T>               = stx.fp.Monoid<T>;

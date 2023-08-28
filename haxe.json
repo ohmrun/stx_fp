@@ -15,7 +15,7 @@
       }
     },
     "test" : {
-      "-L" : ["stx_test"],
+      "-L" : ["stx_test","stx_log"],
       "-cp" : "src/test/haxe",
       "-main" : "stx.fp.Test",
       "interp" : {
